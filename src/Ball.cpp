@@ -4,8 +4,8 @@
 #include "Menu.h"
 #include "Music.h"
 #include "Paddle.h"
-int ballSpeedX = SCREEN_WIDTH / 144;
-int ballSpeedY = SCREEN_WIDTH / 144;
+int ballSpeedX = SCREEN_WIDTH / 98;
+int ballSpeedY = SCREEN_WIDTH / 98;
 SDL_Rect ballImageRect;
 SDL_Texture* ballImageTexture;
 SDL_Rect ball;
@@ -23,24 +23,25 @@ void moveBall() {
 	int yI = ball.y + ballSpeedY;
 	int yF = yI + ball.h;
 
-	if (xI < board.x) {
-		score2++;
-		centerBall();
-		centerPaddles();
-		updateScore();
-		serve = true;
-	}
-	else if (xF > board.x + board.w) {
-		score1++;
-		centerBall();
-		centerPaddles();
-		updateScore();
-		serve = true;
-	}
-
 	if (SDL_HasIntersection(&ball, &paddle1) || SDL_HasIntersection(&ball, &paddle2)) {
 		ballSpeedX = -ballSpeedX;
 		Mix_PlayChannel(1, sound, 0);
+	}
+	else {
+		if (xI < board.x) {
+			score2++;
+			centerBall();
+			centerPaddles();
+			updateScore();
+			serve = true;
+		}
+		else if (xF > board.x + board.w) {
+			score1++;
+			centerBall();
+			centerPaddles();
+			updateScore();
+			serve = true;
+		}
 	}
 
 	ball.x += ballSpeedX;
@@ -73,8 +74,8 @@ void closeBall() {
 	SDL_DestroyTexture(ballImageTexture);
 }
 
-void start() {
-	timer += MS;
+void start(int time) {
+	timer += time;
 	if (timer >= 3000) {
 		timer = 0;
 		serve = false;

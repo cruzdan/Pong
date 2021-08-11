@@ -11,4 +11,4 @@ void moveBall();
 void initBall();
 void loadImageBall();
 void closeBall();
-void start();
+void start(int time);

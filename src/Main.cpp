@@ -44,8 +44,16 @@ int main(int argc, char* args[]) {
 	loadImageBall();
 	initVariables();
 	initJoystick();
+
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+
+	unsigned int frameStart;
+	int frameTime = 0;
+
 	while (!gameOver) {
 
+		frameStart = SDL_GetTicks();
 		switch (menuIndex) {
 
 		case 0:
@@ -58,7 +66,7 @@ int main(int argc, char* args[]) {
 				moveBall();
 			}
 			else {
-				start();
+				start(frameDelay);
 				countStart();
 			}
 			if (players == 1) {
@@ -84,7 +92,11 @@ int main(int argc, char* args[]) {
 			detectKeyPause();
 			drawPauseMenu();
 		}
-		SDL_Delay(MS);
+
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if(frameDelay > frameTime)
+			SDL_Delay(frameDelay - frameTime);
 	}
 	close();
 	return 0;

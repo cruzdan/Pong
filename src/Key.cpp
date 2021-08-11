@@ -50,74 +50,64 @@ void detectKeyPause() {
 }
 
 void detectKeyGame_1() {
-	SDL_Event event;
-	int typeEvent;
-	if (SDL_PollEvent(&event)) {
-		typeEvent = event.type;
-		if (typeEvent == SDL_KEYDOWN) {
-			if (keys[SDL_SCANCODE_W]) {
-				movePaddleUp(&paddle1);
-			}
-			if (keys[SDL_SCANCODE_S]) {
-				movePaddleDown(&paddle1);
-			}
-			if (keys[SDL_SCANCODE_ESCAPE]) {
-				menuIndex = 2;
-				updateMusic();
-			}
-			if (keys[SDL_SCANCODE_R]) {
-				score1 = 0;
-				score2 = 0;
-				timer = 0;
-				serve = true;
-				centerBall();
-				centerPaddles();
-			}
-		}
-		else if (typeEvent == SDL_QUIT) {
-			gameOver = 1;
-		}
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		if (e.type == SDL_QUIT) gameOver = true;
+	}
+	if (keys[SDL_SCANCODE_W]) {
+		movePaddleUp(&paddle1);
+	}
+	if (keys[SDL_SCANCODE_S]) {
+		movePaddleDown(&paddle1);
+	}
+	if (keys[SDL_SCANCODE_ESCAPE]) {
+		menuIndex = 2;
+		updateMusic();
+	}
+	if (keys[SDL_SCANCODE_R]) {
+		score1 = 0;
+		score2 = 0;
+		timer = 0;
+		serve = true;
+		centerBall();
+		centerPaddles();
 	}
 }
 
 void detectKeyGame_2() {
-	SDL_Event event;
-	int typeEvent;
-	if (SDL_PollEvent(&event)) {
-		typeEvent = event.type;
-		if (typeEvent == SDL_KEYDOWN) {
-			if (keys[SDL_SCANCODE_DOWN]) {
-				movePaddleDown(&paddle2);
-			}
-			if (keys[SDL_SCANCODE_UP]) {
-				movePaddleUp(&paddle2);
-			}
-			if (keys[SDL_SCANCODE_W]) {
-				movePaddleUp(&paddle1);
-			}
-			if (keys[SDL_SCANCODE_S]) {
-				movePaddleDown(&paddle1);
-			}
-			if (keys[SDL_SCANCODE_ESCAPE]) {
-				menuIndex = 2;
-				updateMusic();
-			}
-			if (keys[SDL_SCANCODE_R]) {
-				score1 = 0;
-				score2 = 0;
-				timer = 0;
-				serve = true;
-				centerBall();
-				centerPaddles();
-			}
-		}
-		else if (typeEvent == SDL_QUIT) {
-			gameOver = 1;
-		}
+
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		if (e.type == SDL_QUIT) gameOver = true;
+	}
+	if (keys[SDL_SCANCODE_DOWN]) {
+		movePaddleDown(&paddle2);
+	}
+	if (keys[SDL_SCANCODE_UP]) {
+		movePaddleUp(&paddle2);
+	}
+	if (keys[SDL_SCANCODE_W]) {
+		movePaddleUp(&paddle1);
+	}
+	if (keys[SDL_SCANCODE_S]) {
+		movePaddleDown(&paddle1);
+	}
+	if (keys[SDL_SCANCODE_ESCAPE]) {
+		menuIndex = 2;
+		updateMusic();
+	}
+	if (keys[SDL_SCANCODE_R]) {
+		score1 = 0;
+		score2 = 0;
+		timer = 0;
+		serve = true;
+		centerBall();
+		centerPaddles();
 	}
 }
 
 void detectKeyStart() {
+	
 	SDL_Event event;
 	int typeEvent;
 	if (SDL_PollEvent(&event)) {
